@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome, you are In !'),
+        title: const Text('Profile'),
         actions: [
           IconButton(
               onPressed: () {
