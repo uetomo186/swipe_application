@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:219115298367:android:d0013f741a0d59f8d3a28a",
+        "android_client_info": {
+          "package_name": "com.example.swipe_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_efI20c-BOr20PTHcwq2xYUOcyJ8k0ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:219115298367:android:5b0c374ec4863a79d3a28a",
         "android_client_info": {
           "package_name": "swipe.application"
