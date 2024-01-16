@@ -1,88 +1,57 @@
 import '../entities/entities.dart';
 
 class MyUser {
-	final String userId;
-	final String email;
-	final String name;
-  final int age;
-  String description;
-  final Map<String, dynamic> location;
-  List<dynamic> pictures;
+  final String userId;
+  final String email;
+  final String name;
 
-	MyUser({
-		required this.userId,
-		required this.email,
-		required this.name,
-    required this.age,
-    required this.description,
-		required this.location,
-    required this.pictures,
-	});
+  MyUser({
+    required this.userId,
+    required this.email,
+    required this.name,
+  });
 
-	static final empty = MyUser(
-		userId: '', 
-		email: '', 
-		name: '',
-    age: 0,
-    description: '',
-    location: {},
-    pictures: [],
-	);
+  static final empty = MyUser(
+    userId: '',
+    email: '',
+    name: '',
+  );
 
-	MyUser copyWith({
-		String? userId,
-		String? email,
-		String? name,
-    int? age,
-    String? description,
-    Map<String, double>? location,
-    List<String>? pictures
-	}) {
-		return MyUser(
-			userId: userId ?? this.userId, 
-			email: email ?? this.email, 
-			name: name ?? this.name,
-      age: age ?? this.age,
-      description: description ?? this.description, 
-			location: location ?? this.location,
-      pictures: pictures ?? this.pictures
-		);
-	}
+  MyUser copyWith({
+    String? userId,
+    String? email,
+    String? name,
+  }) {
+    return MyUser(
+      userId: userId ?? this.userId,
+      email: email ?? this.email,
+      name: name ?? this.name,
+    );
+  }
 
-	MyUserEntity toEntity() {
-		return MyUserEntity(
-			userId: userId, 
-			email: email, 
-			name: name,
-      age: age,
-      description: description, 
-			location: location,
-      pictures: pictures,
-		);
-	}
+  MyUserEntity toEntity() {
+    return MyUserEntity(
+      userId: userId,
+      email: email,
+      name: name,
+    );
+  }
 
-	static MyUser fromEntity(MyUserEntity entity) {
-		return MyUser(
-			userId: entity.userId, 
-			email: entity.email, 
-			name: entity.name,
-      age: entity.age,
-      description: entity.description, 
-			location: entity.location,
-      pictures: entity.pictures
-		);
-	}
-	
-	@override
+  static MyUser fromEntity(MyUserEntity entity) {
+    return MyUser(
+      userId: entity.userId,
+      email: entity.email,
+      name: entity.name,
+    );
+  }
+
+  @override
   String toString() {
     return '''MyUser :
   userId: $userId, 
   email: $email, 
   name: $name,
-  age: $age,
-  description: $description, 
-  location: $location,
-  pictures: $pictures,
+
   ''';
   }
 }
