@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipe_application/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:swipe_application/components/persistent_nav.dart';
 import 'package:swipe_application/screens/auth/welcome_screen.dart';
 import 'blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'screens/home/home_screen.dart';
@@ -31,7 +32,7 @@ class MyAppView extends StatelessWidget {
               create: (context) => SignInBloc(
                   userRepository:
                       context.read<AuthenticationBloc>().userRepository),
-              child: const HomeScreen(),
+              child: const PersistentTabScreen(),
             );
           } else {
             return const WelcomeScreen();
