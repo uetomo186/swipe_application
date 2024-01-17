@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int numberPhotos = 4;
   int currentPage = 0;
+  late MatchEngine _matchEngine;
 
   List<SwipeItem> items = [
     SwipeItem(
@@ -35,7 +36,47 @@ class _HomeScreenState extends State<HomeScreen> {
         onSlideUpdate: (SlideRegion? region) async {
           log("Region $region");
         }),
+    SwipeItem(
+        content: "Liz",
+        likeAction: () {
+          log("Liked");
+        },
+        nopeAction: () {
+          log("Nope");
+        },
+        superlikeAction: () {
+          log("Super Liked");
+        },
+        onSlideUpdate: (SlideRegion? region) async {
+          log("Region $region");
+        }),
+    SwipeItem(
+        content: "Liz",
+        likeAction: () {
+          log("Liked");
+        },
+        nopeAction: () {
+          log("Nope");
+        },
+        superlikeAction: () {
+          log("Super Liked");
+        },
+        onSlideUpdate: (SlideRegion? region) async {
+          log("Region $region");
+        }),
   ];
+
+  @override
+  void initState() {
+    _matchEngine = MatchEngine(swipeItems: items);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
