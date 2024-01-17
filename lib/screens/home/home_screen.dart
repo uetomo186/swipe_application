@@ -94,13 +94,41 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               "Tinder",
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22),
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
             ),
           ],
         ),
       ),
+      body: SwipeCards(
+          matchEngine: _matchEngine,
+          onStackFinished: () {},
+          itemBuilder: (context, i) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Hero(
+                    tag: "imageTage$i",
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: const DecorationImage(
+                              image: AssetImage("assets/girl.jpg"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+              ),
+            );
+          }),
     );
   }
 }
