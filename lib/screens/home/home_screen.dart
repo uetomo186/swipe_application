@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _controller = PageController(initialPage: 0);
 
   int numberPhotos = 4;
-  int currentPage = 0;
+  int currentPhoto = 0;
   late MatchEngine _matchEngine;
 
   List<SwipeItem> items = [
@@ -119,10 +119,46 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: const DecorationImage(
-                              image: AssetImage("assets/girl.jpg"),
+                              image: AssetImage("assets/girl.png"),
                               fit: BoxFit.cover,
                             ),
                           ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [Colors.black, Colors.transparent])),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (currentPhoto != 0) {
+                                    setState(() {
+                                      currentPhoto = currentPhoto - 1;
+                                    });
+                                  }
+                                },
+                                child: Container(color: Colors.transparent),
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (currentPhoto != 0) {
+                                    setState(() {
+                                      currentPhoto = currentPhoto - 1;
+                                    });
+                                  }
+                                },
+                                child: Container(color: Colors.lightBlue),
+                              ),
+                            ),
+                          ],
                         )
                       ],
                     )),
