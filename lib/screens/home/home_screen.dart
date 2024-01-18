@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               scale: 18,
             ),
             Text(
-              "Tinder",
+              "Swiper",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     });
                                   }
                                 },
-                                child: Container(color: Colors.transparent),
+                                child: Container(color: Colors.red),
                               ),
                             ),
                             Expanded(
@@ -159,6 +159,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ],
+                        ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 6),
+                              child: SizedBox(
+                                  width: MediaQuery.of(context).size.width - 20,
+                                  height: 6,
+                                  child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, int i) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Container(
+                                          width: ((MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  (20 +
+                                                      ((numberPhotos + 1) *
+                                                          8))) /
+                                              numberPhotos),
+                                        ),
+                                      );
+                                    },
+                                  ))),
                         )
                       ],
                     )),
