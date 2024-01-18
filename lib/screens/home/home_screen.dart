@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Align(
                           alignment: Alignment.topCenter,
                           child: Padding(
-                              padding: EdgeInsets.only(top: 6),
+                              padding: const EdgeInsets.only(top: 6),
                               child: SizedBox(
                                   width: MediaQuery.of(context).size.width - 20,
                                   height: 6,
@@ -175,18 +175,75 @@ class _HomeScreenState extends State<HomeScreen> {
                                       return Padding(
                                         padding: const EdgeInsets.only(left: 8),
                                         child: Container(
-                                          width: ((MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  (20 +
-                                                      ((numberPhotos + 1) *
-                                                          8))) /
-                                              numberPhotos),
-                                        ),
+                                            width: ((MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    (20 +
+                                                        ((numberPhotos + 1) *
+                                                            8))) /
+                                                numberPhotos),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5),
+                                            ),
+                                            color: currentPhoto == i
+                                                ? Colors.white
+                                                : Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary
+                                                    .withOpacity(0.5)),
                                       );
                                     },
                                   ))),
-                        )
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Material(
+                                  color: Colors.transparent,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        items[i].content,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Text(
+                                        "25",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                          CupertinoIcons.ant_circle_fill,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
+                            )),
                       ],
                     )),
               ),
