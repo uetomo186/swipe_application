@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               scale: 18,
             ),
             Text(
-              'tinder',
+              'Swiper',
               style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
