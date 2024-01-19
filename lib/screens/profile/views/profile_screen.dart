@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:swipe_application/blocs/sign_in_bloc/sign_in_bloc.dart';
+import 'package:swipe_application/screens/profile/views/add_photo_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -33,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
                   'Photos',
@@ -41,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                 ),
                 child: SizedBox(
@@ -58,15 +60,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               childAspectRatio: 9 / 16),
                       itemBuilder: (context, i) {
                         return GestureDetector(
-                          onTap: () {
-                            if (!(newPhotos.contains(i.toString()))) {
-                              setState(() {
-                                newPhotos.add(i.toString());
-                              });
-                            } else {
-                              setState(() {
-                                newPhotos.remove(i.toString());
-                              });
+                          onTap: () async {
+                            if (!(newPhotos.isNotEmpty &&
+                                (i < newPhotos.length))) {
+                              var photos = await pushNewScreen(context,
+                                  screen: const AddPhotoScreen());
+
+                              if (photos != null) {
+                                setState(() {
+                                  newPhotos.addAll(photos);
+                                });
+                              }
                             }
                           },
                         );
