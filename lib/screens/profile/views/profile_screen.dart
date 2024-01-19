@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -73,6 +76,100 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               }
                             }
                           },
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(5),
+                                child: newPhotos.isNotEmpty &&
+                                        (i < newPhotos.length)
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(
+                                              File(newPhotos[i]),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : DottedBorder(
+                                        color: Colors.grey.shade700,
+                                        borderType: BorderType.RRect,
+                                        radius: const Radius.circular(10),
+                                        dashPattern: [6, 6, 6, 6],
+                                        padding: EdgeInsets.zero,
+                                        strokeWidth: 2,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Material(
+                                  elevation: 4,
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white),
+                                    child: Center(
+                                      child: newPhotos.isNotEmpty &&
+                                              (i < newPhotos.length)
+                                          ? GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  newPhotos
+                                                      .remove(newPhotos[i]);
+                                                });
+                                              },
+                                              child: Container(
+                                                  width: 30,
+                                                  height: 30,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: Colors.white),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            5.0),
+                                                    child: Image.asset(
+                                                      'assets/icons/clear.png',
+                                                      color: Colors.grey,
+                                                    ),
+                                                  )),
+                                            )
+                                          : Container(
+                                              width: 30,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child: Image.asset(
+                                                  'assets/icons/add.png',
+                                                  color: Colors.white,
+                                                ),
+                                              )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       }),
                 ),
