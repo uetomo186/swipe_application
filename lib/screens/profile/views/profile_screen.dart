@@ -163,7 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   'assets/icons/add.png',
                                                   color: Colors.white,
                                                 ),
-                                              )),
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -172,6 +173,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       }),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'About me',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: Colors.white,
+                child: TextFormField(
+                  maxLines: 10,
+                  minLines: 1,
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    hintText: "about me",
+                    border: InputBorder.none,
+                  ),
                 ),
               )
             ],
