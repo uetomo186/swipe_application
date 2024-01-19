@@ -37,11 +37,11 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
             mainAxisSize: MainAxisSize.max,
             children: [
               const Text(
-                "Create New",
+                "新しく作成",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               const Text(
-                "Select a content type",
+                "写真を選択する",
                 style: TextStyle(fontWeight: FontWeight.w300),
               ),
               Expanded(
@@ -139,7 +139,7 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "Camera",
+                            "カメラ",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
