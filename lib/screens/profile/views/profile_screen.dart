@@ -8,7 +8,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        elevation: 0,
         title: const Text('Profile'),
         actions: [
           IconButton(
@@ -17,6 +20,13 @@ class ProfileScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.login))
         ],
+      ),
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+        ),
       ),
     );
   }
