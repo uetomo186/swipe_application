@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swipe_application/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../blocs/sign_up_bloc/sign_up_bloc.dart';
-import 'components/my_text_field.dart';
+import '../../../components/my_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -37,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             signUpRequired = false;
           });
-          Navigator.pop(context);
+          // Navigator.pop(context);
         } else if (state is SignUpProcess) {
           setState(() {
             signUpRequired = true;
@@ -51,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: MyTextField(
@@ -251,6 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               myUser = myUser.copyWith(
                                 email: emailController.text,
                                 name: nameController.text,
+                                age: int.parse(ageController.text),
                               );
                               setState(() {
                                 context.read<SignUpBloc>().add(SignUpRequired(

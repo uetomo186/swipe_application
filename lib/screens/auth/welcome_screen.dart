@@ -66,11 +66,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 ),
               ),
               BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
+                filter: ImageFilter.blur(sigmaX: 50.0, sigmaY: 50.0),
                 child: Container(),
               ),
               Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height / 1.8,
                   child: Column(
@@ -89,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                'Sign In',
+                                '新規登録',
                                 style: TextStyle(
                                   fontSize: 18,
                                 ),
