@@ -239,44 +239,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     }),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              const SizedBox(height: 10),
               !signUpRequired
-                  ? SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: TextButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              MyUser myUser = MyUser.empty;
-                              myUser = myUser.copyWith(
-                                email: emailController.text,
-                                name: nameController.text,
-                                age: int.parse(ageController.text),
-                              );
-                              setState(() {
-                                context.read<SignUpBloc>().add(SignUpRequired(
-                                    myUser, passwordController.text));
-                              });
-                            }
-                          },
-                          style: TextButton.styleFrom(
-                              elevation: 3.0,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(60))),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 5),
-                            child: Text(
-                              'Sign Up',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          )),
+                  ? Expanded(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: TextButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                MyUser myUser = MyUser.empty;
+                                myUser = myUser.copyWith(
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  age: int.parse(ageController.text),
+                                );
+                                setState(() {
+                                  context.read<SignUpBloc>().add(SignUpRequired(
+                                      myUser, passwordController.text));
+                                });
+                              }
+                            },
+                            style: TextButton.styleFrom(
+                                elevation: 3.0,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(60))),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25, vertical: 5),
+                              child: Text(
+                                '新規登録',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            )),
+                      ),
                     )
                   : const CircularProgressIndicator()
             ],
