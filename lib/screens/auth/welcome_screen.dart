@@ -72,7 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               Align(
                 alignment: Alignment.center,
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 1.8,
+                  height: MediaQuery.of(context).size.height / 1.75,
                   child: Column(
                     children: [
                       Padding(
@@ -89,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                '新規登録',
+                                'ログイン',
                                 style: TextStyle(
                                   fontSize: 18,
                                 ),
@@ -98,7 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             Padding(
                               padding: EdgeInsets.all(12.0),
                               child: Text(
-                                'Sign Up',
+                                '新規登録',
                                 style: TextStyle(
                                   fontSize: 18,
                                 ),

@@ -121,7 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 5),
                             child: Text(
-                              'Sign In',
+                              'ログイン',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
