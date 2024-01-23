@@ -17,7 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> newPhotos = [];
+  TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          setState(() {
+            context.read<AuthenticationBloc>().state.user!.description =
+                descriptionController.text;
+          });
           print(context.read<AuthenticationBloc>().state.user!.pictures.length);
         },
         child: const Icon(
@@ -75,17 +79,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       itemBuilder: (context, i) {
                         return GestureDetector(
                           onTap: () async {
-                            context
-                                .read<AuthenticationBloc>()
-                                .state
-                                .user!
-                                .pictures;
-                            if (!(newPhotos.isNotEmpty &&
-                                (i < newPhotos.length))) {
+                            if (!(context
+                                    .read<AuthenticationBloc>()
+                                    .state
+                                    .user!
+                                    .pictures
+                                    .isNotEmpty &&
+                                (i <
+                                    context
+                                        .read<AuthenticationBloc>()
+                                        .state
+                                        .user!
+                                        .pictures
+                                        .length))) {
                               var photos = await pushNewScreen(context,
                                   screen: const AddPhotoScreen());
 
-                              if (photos != null) {
+                              if (photos != null && photos.isNotEmpty) {
                                 setState(() {
                                   context
                                       .read<AuthenticationBloc>()
@@ -120,9 +130,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               BorderRadius.circular(10),
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: FileImage(
-                                              File(newPhotos[i]),
-                                            ),
+                                            image: FileImage(File(context
+                                                .read<AuthenticationBloc>()
+                                                .state
+                                                .user!
+                                                .pictures[i])),
                                           ),
                                         ),
                                       )
@@ -153,8 +165,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         shape: BoxShape.circle,
                                         color: Colors.white),
                                     child: Center(
-                                      child: newPhotos.isNotEmpty &&
-                                              (i < newPhotos.length)
+                                      child: context
+                                                  .read<AuthenticationBloc>()
+                                                  .state
+                                                  .user!
+                                                  .pictures
+                                                  .isNotEmpty &&
+                                              (i <
+                                                  context
+                                                      .read<
+                                                          AuthenticationBloc>()
+                                                      .state
+                                                      .user!
+                                                      .pictures
+                                                      .length)
                                           ? GestureDetector(
                                               onTap: () {
                                                 setState(() {
@@ -233,6 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 color: Colors.white,
                 child: TextFormField(
+                  controller: descriptionController,
                   maxLines: 10,
                   minLines: 1,
                   decoration: const InputDecoration(
