@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:swipe_application/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:swipe_application/blocs/setup_data_bloc/setup_data_bloc.dart';
+import 'package:swipe_application/blocs/setup_data_bloc/setup_data_event.dart';
 import 'package:swipe_application/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:swipe_application/screens/profile/views/add_photo_screen.dart';
 
@@ -30,6 +32,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 descriptionController.text;
           });
           print(context.read<AuthenticationBloc>().state.user!.pictures.length);
+          context.read<SetupDataBloc>().add(
+              SetupRequired(context.read<AuthenticationBloc>().state.user!));
         },
         child: const Icon(
           CupertinoIcons.check_mark,
