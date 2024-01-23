@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:user_repository/src/models/user.dart';
-import 'package:user_repository/src/user_repo.dart';
+
 import 'package:user_repository/user_repository.dart';
 
 class FirebaseUserRepo implements UserRepository {
@@ -20,7 +22,7 @@ class FirebaseUserRepo implements UserRepository {
       if (firebaseUser == null) {
         yield MyUser.empty;
       } else {
-        await usersCollection.doc(firebaseUser.uid).get().then((value) =>
+        yield await usersCollection.doc(firebaseUser.uid).get().then((value) =>
             MyUser.fromEntity(MyUserEntity.fromDocument(value.data()!)));
       }
     });
@@ -57,7 +59,7 @@ class FirebaseUserRepo implements UserRepository {
     try {
       await usersCollection
           .doc(myUser.userId)
-          .set(myUser.toEntity().toDocument as Map<String, dynamic>);
+          .set(myUser.toEntity().toDocument());
     } catch (e) {
       log(e.toString());
       rethrow;
@@ -67,5 +69,48 @@ class FirebaseUserRepo implements UserRepository {
   @override
   Future<void> logOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<MyUser> userSetup(MyUser myUser) async {
+    try {
+      List<String> tempURL = [];
+
+      for (String picture in myUser.pictures) {
+        if (!picture.startsWith('https')) {
+          File imageFile = File(picture);
+          String imageName = basename(picture);
+          Reference firebaseStorageRef = FirebaseStorage.instance
+              .ref()
+              .child("users/${myUser.userId}/pictures/$imageName");
+          await firebaseStorageRef.putFile(imageFile);
+          String imageURL = await firebaseStorageRef.getDownloadURL();
+          tempURL.add(imageURL);
+        }
+      }
+      myUser.pictures
+          .removeWhere((element) => !(element as String).startsWith('http'));
+      myUser.pictures.addAll(tempURL);
+
+      await usersCollection.doc(myUser.userId).update(
+          {'description': myUser.description, 'pictures': myUser.pictures});
+
+      return myUser;
+    } catch (e) {
+      print(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> setupLocation(double lat, double lng, MyUser myUser) async {
+    try {
+      await usersCollection.doc(myUser.userId).update({
+        'location': {'lat': lat, 'lng': lng}
+      });
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
   }
 }
