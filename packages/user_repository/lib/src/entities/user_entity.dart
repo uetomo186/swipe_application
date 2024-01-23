@@ -34,7 +34,7 @@ class MyUserEntity {
         userId: doc['userId'],
         email: doc['email'],
         name: doc['name'],
-        age: doc['age'],
+        age: doc['age'] as int,
         description: doc['description'],
         location: doc['location'],
         pictures: doc['pictures']);
