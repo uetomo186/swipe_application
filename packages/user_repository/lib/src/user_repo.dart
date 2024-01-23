@@ -11,4 +11,8 @@ abstract class UserRepository {
   Future<void> signIn(String email, String password);
 
   Future<void> logOut();
+
+  Future<MyUser> userSetup(MyUser myUser);
+
+  Future<void> setupLocation(double lat, double lng, MyUser myUser);
 }
