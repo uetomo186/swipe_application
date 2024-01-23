@@ -7,8 +7,8 @@ class MyUser extends Equatable {
   final String name;
   final int age;
   final String description;
-  final Map<String, double> location;
-  final List<String> pictures;
+  final Map<String, dynamic> location;
+  final List<dynamic> pictures;
 
   const MyUser({
     required this.userId,
