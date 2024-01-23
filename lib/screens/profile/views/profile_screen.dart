@@ -24,7 +24,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          print(context.read<AuthenticationBloc>().state.user!.pictures.length);
+        },
         child: const Icon(
           CupertinoIcons.check_mark,
           color: Colors.white,
@@ -73,11 +75,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       itemBuilder: (context, i) {
                         return GestureDetector(
                           onTap: () async {
-                            // context
-                            //     .read<AuthenticationBloc>()
-                            //     .state
-                            //     .user
-                            //     .pictures
+                            context
+                                .read<AuthenticationBloc>()
+                                .state
+                                .user!
+                                .pictures;
                             if (!(newPhotos.isNotEmpty &&
                                 (i < newPhotos.length))) {
                               var photos = await pushNewScreen(context,
@@ -99,8 +101,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.all(5),
-                                child: newPhotos.isNotEmpty &&
-                                        (i < newPhotos.length)
+                                child: context
+                                            .read<AuthenticationBloc>()
+                                            .state
+                                            .user!
+                                            .pictures
+                                            .isNotEmpty &&
+                                        (i <
+                                            context
+                                                .read<AuthenticationBloc>()
+                                                .state
+                                                .user!
+                                                .pictures
+                                                .length)
                                     ? Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -145,8 +158,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ? GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  newPhotos
-                                                      .remove(newPhotos[i]);
+                                                  context
+                                                      .read<
+                                                          AuthenticationBloc>()
+                                                      .state
+                                                      .user!
+                                                      .pictures
+                                                      .remove(context
+                                                          .read<
+                                                              AuthenticationBloc>()
+                                                          .state
+                                                          .user!
+                                                          .pictures[i]);
                                                 });
                                               },
                                               child: Container(
