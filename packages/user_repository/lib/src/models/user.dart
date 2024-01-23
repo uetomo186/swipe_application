@@ -1,16 +1,15 @@
-import 'package:equatable/equatable.dart';
 import '../entities/entities.dart';
 
-class MyUser extends Equatable {
+class MyUser {
   final String userId;
   final String email;
   final String name;
   final int age;
-  final String description;
+  String description;
   final Map<String, dynamic> location;
-  final List<dynamic> pictures;
+  List<dynamic> pictures;
 
-  const MyUser({
+  MyUser({
     required this.userId,
     required this.email,
     required this.name,
@@ -20,14 +19,15 @@ class MyUser extends Equatable {
     required this.pictures,
   });
 
-  static const empty = MyUser(
-      userId: '',
-      email: '',
-      name: '',
-      age: 0,
-      description: '',
-      location: {},
-      pictures: []);
+  static final empty = MyUser(
+    userId: '',
+    email: '',
+    name: '',
+    age: 0,
+    description: '',
+    location: {},
+    pictures: [],
+  );
 
   MyUser copyWith(
       {String? userId,
@@ -38,25 +38,25 @@ class MyUser extends Equatable {
       Map<String, double>? location,
       List<String>? pictures}) {
     return MyUser(
-      userId: userId ?? this.userId,
-      email: email ?? this.email,
-      name: name ?? this.name,
-      age: age ?? this.age,
-      description: description ?? this.description,
-      location: location ?? this.location,
-      pictures: pictures ?? this.pictures,
-    );
+        userId: userId ?? this.userId,
+        email: email ?? this.email,
+        name: name ?? this.name,
+        age: age ?? this.age,
+        description: description ?? this.description,
+        location: location ?? this.location,
+        pictures: pictures ?? this.pictures);
   }
 
   MyUserEntity toEntity() {
     return MyUserEntity(
-        userId: userId,
-        email: email,
-        name: name,
-        age: age,
-        description: description,
-        location: location,
-        pictures: pictures);
+      userId: userId,
+      email: email,
+      name: name,
+      age: age,
+      description: description,
+      location: location,
+      pictures: pictures,
+    );
   }
 
   static MyUser fromEntity(MyUserEntity entity) {
@@ -64,13 +64,22 @@ class MyUser extends Equatable {
         userId: entity.userId,
         email: entity.email,
         name: entity.name,
-        age: 0,
-        description: '',
-        location: {},
-        pictures: []);
+        age: entity.age,
+        description: entity.description,
+        location: entity.location,
+        pictures: entity.pictures);
   }
 
   @override
-  List<Object?> get props =>
-      [userId, email, name, age, description, location, pictures];
+  String toString() {
+    return '''MyUser :
+  userId: $userId, 
+  email: $email, 
+  name: $name,
+  age: $age,
+  description: $description, 
+  location: $location,
+  pictures: $pictures,
+  ''';
+  }
 }
