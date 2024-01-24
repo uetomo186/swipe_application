@@ -1,7 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swipe_application/blocs/setup_data_bloc/setup_data_event.dart';
-import 'package:swipe_application/blocs/setup_data_bloc/setup_data_state.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:user_repository/user_repository.dart';
+
+part 'setup_data_event.dart';
+part 'setup_data_state.dart';
 
 class SetupDataBloc extends Bloc<SetupDataEvent, SetupDataState> {
   UserRepository userRepository;

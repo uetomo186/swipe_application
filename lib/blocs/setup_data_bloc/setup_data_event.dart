@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:user_repository/user_repository.dart';
+part of 'setup_data_bloc.dart';
 
 sealed class SetupDataEvent extends Equatable {
   const SetupDataEvent();
@@ -8,7 +7,7 @@ sealed class SetupDataEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetupRequired extends SetupDataEvent {
+class SetupRequired extends SetupDataEvent{
   final MyUser myUser;
 
   const SetupRequired(this.myUser);
