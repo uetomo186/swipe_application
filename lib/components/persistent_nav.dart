@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:swipe_application/blocs/setup_data_bloc/setup_data_bloc.dart';
 import 'package:swipe_application/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:swipe_application/screens/home/home_screen.dart';
 
@@ -31,10 +32,10 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
                 userRepository:
                     context.read<AuthenticationBloc>().userRepository),
           ),
-          // BlocProvider(
-          //   create: (context) => SetupDataBloc(
-          //       context.read<AuthenticationBloc>().userRepository),
-          // )
+          BlocProvider(
+            create: (context) => SetupDataBloc(
+                context.read<AuthenticationBloc>().userRepository),
+          )
         ],
         child: const ProfileScreen(),
       )
