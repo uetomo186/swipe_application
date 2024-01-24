@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:swipe_application/blocs/setup_data_bloc/setup_data_bloc.dart';
-import 'package:swipe_application/blocs/sign_in_bloc/sign_in_bloc.dart';
-import 'package:swipe_application/screens/home/home_screen.dart';
 
 import '../blocs/authentication_bloc/authentication_bloc.dart';
-
+import '../screens/auth/blocs/sign_in_bloc/sign_in_bloc.dart';
+import '../screens/home/views/home_screen.dart';
 import '../screens/profile/views/profile_screen.dart';
 
 class PersistentTabScreen extends StatefulWidget {
@@ -91,7 +90,8 @@ class _PersistentTabScreenState extends State<PersistentTabScreen> {
       backgroundColor:
           Theme.of(context).colorScheme.background, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
